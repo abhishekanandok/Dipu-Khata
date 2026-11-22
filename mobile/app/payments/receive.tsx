@@ -21,6 +21,7 @@ import { GlassInput } from '../../components/glass/GlassInput';
 import { GlassButton } from '../../components/glass/GlassButton';
 import { AmountDisplay, formatCurrency } from '../../components/common/AmountDisplay';
 import { api } from '../../services/api';
+import { PrintService } from '../../services/printService';
 
 type PaymentMode = 'CASH' | 'UPI' | 'BANK' | 'CHEQUE';
 
@@ -155,6 +156,15 @@ export default function ReceivePaymentScreen() {
                 size="md"
                 icon={<Ionicons name="logo-whatsapp" size={18} color="#FFF" />}
                 onPress={handleWhatsAppReceipt}
+                style={styles.whatsappBtn}
+              />
+
+              <GlassButton
+                title="Download / Print PDF Receipt"
+                variant="secondary"
+                size="md"
+                icon={<Ionicons name="document-text-outline" size={18} color={Colors.textPrimary} />}
+                onPress={() => PrintService.printReceipt(recordedPayment._id, 'share')}
                 style={styles.whatsappBtn}
               />
 

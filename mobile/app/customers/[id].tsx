@@ -20,6 +20,7 @@ import { GlassCard } from '../../components/glass/GlassCard';
 import { AmountDisplay, formatCurrency } from '../../components/common/AmountDisplay';
 import { StatusBadge } from '../../components/common/StatusBadge';
 import { api } from '../../services/api';
+import { PrintService } from '../../services/printService';
 
 export default function CustomerKhataScreen() {
   const router = useRouter();
@@ -142,7 +143,15 @@ export default function CustomerKhataScreen() {
 
             <TouchableOpacity style={styles.contactBtn} onPress={handleShareStatement}>
               <Ionicons name="logo-whatsapp" size={16} color={Colors.success} />
-              <Text style={[styles.contactBtnText, { color: Colors.success }]}>Share Statement</Text>
+              <Text style={[styles.contactBtnText, { color: Colors.success }]}>WhatsApp</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.contactBtn}
+              onPress={() => PrintService.printStatement(id!, 'share')}
+            >
+              <Ionicons name="document-text-outline" size={16} color={Colors.textPrimary} />
+              <Text style={styles.contactBtnText}>PDF</Text>
             </TouchableOpacity>
           </View>
         </GlassCard>

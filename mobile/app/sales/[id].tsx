@@ -21,6 +21,7 @@ import { GlassInput } from '../../components/glass/GlassInput';
 import { AmountDisplay, formatCurrency } from '../../components/common/AmountDisplay';
 import { StatusBadge } from '../../components/common/StatusBadge';
 import { api } from '../../services/api';
+import { PrintService } from '../../services/printService';
 
 export default function SaleDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -286,6 +287,24 @@ export default function SaleDetailScreen() {
             size="md"
             icon={<Ionicons name="logo-whatsapp" size={18} color="#FFF" />}
             onPress={handleWhatsAppShare}
+            style={styles.actionBtn}
+          />
+
+          <GlassButton
+            title="Download / Share PDF Invoice"
+            variant="secondary"
+            size="md"
+            icon={<Ionicons name="document-text-outline" size={18} color={Colors.textPrimary} />}
+            onPress={() => PrintService.printInvoice(id as string, 'share')}
+            style={styles.actionBtn}
+          />
+
+          <GlassButton
+            title="Print Invoice (A4 / Thermal)"
+            variant="outline"
+            size="md"
+            icon={<Ionicons name="print-outline" size={18} color={Colors.primaryLight} />}
+            onPress={() => PrintService.printInvoice(id as string, 'print')}
             style={styles.actionBtn}
           />
 
