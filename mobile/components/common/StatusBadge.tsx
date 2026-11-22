@@ -8,15 +8,31 @@ interface StatusBadgeProps {
   label: string;
   hindiLabel?: string;
   variant?: BadgeVariant;
+  status?: string;
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({
   label,
   hindiLabel,
-  variant = 'neutral',
+  variant,
+  status,
 }) => {
+  const resolveVariant = (): BadgeVariant => {
+    if (variant) return variant;
+    if (status) {
+      const s = status.toUpperCase();
+      if (['COMPLETED', 'PAID', 'DELIVERED', 'CONVERTED'].includes(s)) return 'success';
+      if (['CANCELLED', 'REJECTED', 'FAILED', 'UNPAID'].includes(s)) return 'danger';
+      if (['PENDING', 'PARTIAL', 'DRAFT', 'SENT'].includes(s)) return 'warning';
+      if (['INFO', 'PROCESSING'].includes(s)) return 'info';
+    }
+    return 'neutral';
+  };
+
+  const activeVariant = resolveVariant();
+
   const getBadgeColors = () => {
-    switch (variant) {
+    switch (activeVariant) {
       case 'success':
         return { bg: Colors.successGlass, border: Colors.success, text: Colors.success };
       case 'danger':

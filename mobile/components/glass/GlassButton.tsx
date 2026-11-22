@@ -6,14 +6,16 @@ import {
   ActivityIndicator,
   TouchableOpacityProps,
   ViewStyle,
+  View,
 } from 'react-native';
-import { Colors, BorderRadius, Spacing } from '../../constants/theme';
+import { Colors, BorderRadius } from '../../constants/theme';
 
 interface GlassButtonProps extends TouchableOpacityProps {
   title: string;
   variant?: 'primary' | 'secondary' | 'danger' | 'outline';
   loading?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  icon?: React.ReactNode;
 }
 
 export const GlassButton: React.FC<GlassButtonProps> = ({
@@ -21,6 +23,7 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
   variant = 'primary',
   loading = false,
   size = 'md',
+  icon,
   disabled,
   style,
   ...props
@@ -66,7 +69,10 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
       {loading ? (
         <ActivityIndicator color="#FFFFFF" size="small" />
       ) : (
-        <Text style={[styles.text, disabled && styles.textDisabled]}>{title}</Text>
+        <View style={styles.contentRow}>
+          {icon && <View style={styles.iconContainer}>{icon}</View>}
+          <Text style={[styles.text, disabled && styles.textDisabled]}>{title}</Text>
+        </View>
       )}
     </TouchableOpacity>
   );
@@ -78,6 +84,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+  },
+  contentRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconContainer: {
+    marginRight: 6,
   },
   text: {
     color: '#FFFFFF',

@@ -6,18 +6,21 @@ import {
   StyleSheet,
   TextInputProps,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors, BorderRadius, Spacing } from '../../constants/theme';
 
 interface GlassInputProps extends TextInputProps {
   label?: string;
   error?: string;
   prefix?: string;
+  leftIcon?: keyof typeof Ionicons.glyphMap | string;
 }
 
 export const GlassInput: React.FC<GlassInputProps> = ({
   label,
   error,
   prefix,
+  leftIcon,
   style,
   ...props
 }) => {
@@ -25,6 +28,14 @@ export const GlassInput: React.FC<GlassInputProps> = ({
     <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
       <View style={[styles.inputWrapper, error ? styles.inputError : null]}>
+        {leftIcon && (
+          <Ionicons
+            name={leftIcon as any}
+            size={18}
+            color={Colors.textMuted}
+            style={styles.leftIcon}
+          />
+        )}
         {prefix && <Text style={styles.prefix}>{prefix}</Text>}
         <TextInput
           placeholderTextColor={Colors.textMuted}
@@ -56,6 +67,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.surfaceBorder,
     paddingHorizontal: 12,
+  },
+  leftIcon: {
+    marginRight: 8,
   },
   inputError: {
     borderColor: Colors.danger,

@@ -6,6 +6,7 @@ import { customerRouter } from '../modules/customers/customer.routes.js';
 import { materialRouter, categoryRouter } from '../modules/materials/material.routes.js';
 import { purchaseRouter, supplierRouter } from '../modules/purchases/purchase.routes.js';
 import { inventoryRouter } from '../modules/inventory/inventory.routes.js';
+import { salesRouter, estimateRouter } from '../modules/sales/sale.routes.js';
 
 export const apiRouter = Router();
 
@@ -18,3 +19,5 @@ apiRouter.use('/categories', categoryRouter);
 apiRouter.use('/purchases', purchaseRouter);
 apiRouter.use('/suppliers', supplierRouter);
 apiRouter.use('/inventory', inventoryRouter);
+apiRouter.use('/sales', salesRouter);
+apiRouter.use('/estimates', estimateRouter);

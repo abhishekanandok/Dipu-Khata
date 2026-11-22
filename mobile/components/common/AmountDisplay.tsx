@@ -3,7 +3,8 @@ import { Text, StyleSheet, TextStyle } from 'react-native';
 import { Colors } from '../../constants/theme';
 
 interface AmountDisplayProps {
-  amountInPaise: number;
+  amountInPaise?: number;
+  amount?: number;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showSign?: boolean;
   color?: string;
@@ -38,11 +39,14 @@ export const formatCurrency = (paise: number, showDecimals = true): string => {
 
 export const AmountDisplay: React.FC<AmountDisplayProps> = ({
   amountInPaise,
+  amount,
   size = 'md',
   showSign = false,
   color,
   style,
 }) => {
+  const actualPaise = amountInPaise !== undefined ? amountInPaise : (amount !== undefined ? amount : 0);
+
   const getFontSize = () => {
     switch (size) {
       case 'sm':
@@ -58,12 +62,12 @@ export const AmountDisplay: React.FC<AmountDisplayProps> = ({
 
   const getAutoColor = () => {
     if (color) return color;
-    if (amountInPaise > 0) return Colors.danger; // Due / Receivable
-    if (amountInPaise < 0) return Colors.success; // Advance / Credit
+    if (actualPaise > 0) return Colors.danger; // Due / Receivable
+    if (actualPaise < 0) return Colors.success; // Advance / Credit
     return Colors.textPrimary;
   };
 
-  const formatted = formatCurrency(amountInPaise);
+  const formatted = formatCurrency(actualPaise);
 
   return (
     <Text
@@ -76,7 +80,7 @@ export const AmountDisplay: React.FC<AmountDisplayProps> = ({
         style,
       ]}
     >
-      {showSign && amountInPaise > 0 ? `+${formatted}` : formatted}
+      {showSign && actualPaise > 0 ? `+${formatted}` : formatted}
     </Text>
   );
 };

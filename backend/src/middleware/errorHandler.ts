@@ -3,10 +3,21 @@ import { ZodError } from 'zod';
 import { ApiRes } from '../utils/apiResponse.js';
 import { logger } from '../utils/logger.js';
 
-interface CustomError extends Error {
+export interface CustomError extends Error {
   statusCode?: number;
   code?: string;
   details?: unknown;
+}
+
+export class AppError extends Error {
+  statusCode: number;
+  code?: string;
+  constructor(message: string, statusCode = 400, code?: string) {
+    super(message);
+    this.name = 'AppError';
+    this.statusCode = statusCode;
+    this.code = code;
+  }
 }
 
 export const errorHandler = (

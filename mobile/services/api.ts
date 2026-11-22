@@ -214,6 +214,47 @@ export const api = {
     const response = await apiClient.post('/purchases', data);
     return response.data.data;
   },
+  // Sales & Invoices APIs
+  getSales: async (params?: {
+    search?: string;
+    customerId?: string;
+    paymentStatus?: string;
+    deliveryStatus?: string;
+    page?: number;
+    limit?: number;
+  }) => {
+    const response = await apiClient.get('/sales', { params });
+    return response.data;
+  },
+  getSaleById: async (id: string) => {
+    const response = await apiClient.get(`/sales/${id}`);
+    return response.data.data;
+  },
+  createSale: async (data: any) => {
+    const response = await apiClient.post('/sales', data);
+    return response.data.data;
+  },
+  cancelSale: async (id: string, reason: string) => {
+    const response = await apiClient.post(`/sales/${id}/cancel`, { reason });
+    return response.data.data;
+  },
+  // Estimates APIs
+  getEstimates: async (params?: { search?: string; status?: string; page?: number; limit?: number }) => {
+    const response = await apiClient.get('/estimates', { params });
+    return response.data;
+  },
+  getEstimateById: async (id: string) => {
+    const response = await apiClient.get(`/estimates/${id}`);
+    return response.data.data;
+  },
+  createEstimate: async (data: any) => {
+    const response = await apiClient.post('/estimates', data);
+    return response.data.data;
+  },
+  convertEstimate: async (id: string, data: any) => {
+    const response = await apiClient.post(`/estimates/${id}/convert`, data);
+    return response.data.data;
+  },
   // Inventory APIs
   getStockOverview: async () => {
     const response = await apiClient.get('/inventory');
