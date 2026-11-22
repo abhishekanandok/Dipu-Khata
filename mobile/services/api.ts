@@ -129,15 +129,7 @@ export const api = {
     const response = await apiClient.get(`/customers/${id}`);
     return response.data.data;
   },
-  createCustomer: async (data: {
-    name: string;
-    mobile: string;
-    village?: string;
-    address?: string;
-    notes?: string;
-    openingBalance: number;
-    openingBalanceType: 'RECEIVABLE' | 'PAYABLE';
-  }) => {
+  createCustomer: async (data: any) => {
     const response = await apiClient.post('/customers', data);
     return response.data.data;
   },
@@ -155,12 +147,41 @@ export const api = {
     const response = await apiClient.get(`/customers/${id}/summary`);
     return response.data.data;
   },
-  addCustomerAdjustment: async (id: string, data: {
-    amount: number;
-    type: 'DEBIT' | 'CREDIT';
-    description: string;
-  }) => {
+  addCustomerAdjustment: async (id: string, data: any) => {
     const response = await apiClient.post(`/customers/${id}/adjustment`, data);
+    return response.data.data;
+  },
+  // Material & Category APIs
+  getCategories: async () => {
+    const response = await apiClient.get('/categories');
+    return response.data.data;
+  },
+  createCategory: async (data: { name: string; hindiName?: string; description?: string }) => {
+    const response = await apiClient.post('/categories', data);
+    return response.data.data;
+  },
+  getMaterials: async (search?: string, category?: string, lowStockOnly?: boolean) => {
+    const params: Record<string, any> = {};
+    if (search) params.search = search;
+    if (category && category !== 'All') params.category = category;
+    if (lowStockOnly) params.lowStockOnly = 'true';
+    const response = await apiClient.get('/materials', { params });
+    return response.data;
+  },
+  getMaterialById: async (id: string) => {
+    const response = await apiClient.get(`/materials/${id}`);
+    return response.data.data;
+  },
+  createMaterial: async (data: any) => {
+    const response = await apiClient.post('/materials', data);
+    return response.data.data;
+  },
+  updateMaterial: async (id: string, data: any) => {
+    const response = await apiClient.put(`/materials/${id}`, data);
+    return response.data.data;
+  },
+  getPriceHistory: async (id: string) => {
+    const response = await apiClient.get(`/materials/${id}/price-history`);
     return response.data.data;
   },
   // Auth APIs
