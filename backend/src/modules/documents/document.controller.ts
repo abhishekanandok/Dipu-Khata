@@ -4,6 +4,7 @@ import { Estimate } from '../sales/estimate.model.js';
 import { Customer } from '../customers/customer.model.js';
 import { LedgerEntry } from '../ledger/ledger.model.js';
 import { Payment } from '../payments/payment.model.js';
+import { Delivery } from '../deliveries/delivery.model.js';
 import { DocumentTemplateService } from './documentTemplate.service.js';
 import { AppError } from '../../middleware/errorHandler.js';
 
@@ -78,6 +79,21 @@ export class DocumentController {
       }
 
       const html = DocumentTemplateService.generatePaymentReceiptHtml(payment);
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.send(html);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  static async getChallanHtml(req: Request, res: Response, next: NextFunction) {
+    try {
+      const delivery = await Delivery.findById(req.params.id);
+      if (!delivery) {
+        throw new AppError('Delivery challan not found', 404);
+      }
+
+      const html = DocumentTemplateService.generateChallanHtml(delivery);
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
       return res.send(html);
     } catch (error) {

@@ -3,6 +3,7 @@ import { IEstimate } from '../sales/estimate.model.js';
 import { ICustomer } from '../customers/customer.model.js';
 import { ILedgerEntry } from '../ledger/ledger.model.js';
 import { IPayment } from '../payments/payment.model.js';
+import { IDelivery } from '../deliveries/delivery.model.js';
 
 export class DocumentTemplateService {
   /**
@@ -551,6 +552,105 @@ export class DocumentTemplateService {
         <div class="signatures">
           <div class="sign-box">Payer's Signature</div>
           <div class="sign-box">Authorized Signatory<br>Dipu Khata & Trade</div>
+        </div>
+      </body>
+      </html>
+    `;
+  }
+
+  /**
+   * Generates bilingual printable HTML for Delivery Challan.
+   */
+  static generateChallanHtml(delivery: IDelivery): string {
+    const itemsHtml = delivery.items
+      .map(
+        (item, idx) => `
+        <tr>
+          <td class="text-center">${idx + 1}</td>
+          <td><strong>${item.materialName}</strong></td>
+          <td class="text-center" style="font-size: 14px; font-weight: 700;">${item.quantity} ${item.unit}</td>
+        </tr>
+      `
+      )
+      .join('');
+
+    const dateFormatted = new Date(delivery.dispatchDate).toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+
+    return `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <title>Challan #${delivery.challanNumber}</title>
+        ${this.getBaseCss()}
+      </head>
+      <body>
+        <div class="header">
+          <div class="brand-row">
+            <div>
+              <h1 class="brand-title">DIPU KHATA & TRADE</h1>
+              <div class="brand-hindi">सामान डिलीवरी चालान (DELIVERY CHALLAN)</div>
+              <div class="brand-tagline">Building Materials Transport & Logistics</div>
+            </div>
+            <div class="brand-contact">
+              <div>Main Road, Koelwar / Bihta, Bihar</div>
+              <div>Phone: +91 98350 XXXXX</div>
+              <span class="doc-badge badge-paid">GOODS DISPATCHED</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-col">
+            <div class="info-label">Customer & Delivery Site:</div>
+            <div class="info-val">${delivery.customerName}</div>
+            <div style="font-size: 11px; color: #475569;">📞 ${delivery.customerMobile}</div>
+            <div style="font-size: 11px; color: #0f766e; margin-top: 4px;">📍 <strong>Site Address:</strong> ${delivery.deliveryAddress}</div>
+          </div>
+          <div class="info-col" style="text-align: right;">
+            <div class="info-label">Challan Details:</div>
+            <div class="info-val">#${delivery.challanNumber}</div>
+            <div style="font-size: 11px; color: #475569;">Against Invoice: #${delivery.invoiceNumber}</div>
+            <div style="font-size: 11px; color: #475569;">Dispatch Date: ${dateFormatted}</div>
+          </div>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px; margin-bottom: 16px; display: flex; justify-content: space-between;">
+          <div>
+            <strong>Vehicle (गाड़ी):</strong> ${delivery.vehicleNumber || 'Store Vehicle'}
+          </div>
+          <div>
+            <strong>Driver (चालक):</strong> ${delivery.driverName || 'Designated Driver'} ${delivery.driverMobile ? `(${delivery.driverMobile})` : ''}
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th class="text-center" style="width: 50px;">#</th>
+              <th>Material Dispatched (भेजा गया सामान)</th>
+              <th class="text-center" style="width: 180px;">Dispatched Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${itemsHtml}
+          </tbody>
+        </table>
+
+        ${delivery.notes ? `<div style="font-size: 11px; color: #64748b; margin-bottom: 16px;"><strong>Remarks:</strong> ${delivery.notes}</div>` : ''}
+
+        <div class="signatures" style="margin-top: 60px;">
+          <div class="sign-box">Driver Signature (चालक हस्ताक्षर)</div>
+          <div class="sign-box">Receiver Signature (प्राप्तकर्ता हस्ताक्षर)</div>
+          <div class="sign-box">Authorized Dispatcher<br>Dipu Khata & Trade</div>
+        </div>
+
+        <div class="footer-note">
+          Check goods upon delivery • Dipu Khata & Trade • Thank you!
         </div>
       </body>
       </html>

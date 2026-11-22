@@ -233,7 +233,7 @@ export default function DashboardScreen() {
 
           <TouchableOpacity
             style={styles.quickActionBtn}
-            onPress={() => router.push('/(tabs)/stock')}
+            onPress={() => router.push('/purchases/add')}
             activeOpacity={0.8}
           >
             <View style={[styles.quickIconCircle, { backgroundColor: 'rgba(168, 85, 247, 0.2)' }]}>
@@ -245,7 +245,7 @@ export default function DashboardScreen() {
 
           <TouchableOpacity
             style={styles.quickActionBtn}
-            onPress={() => router.push('/(tabs)/more')}
+            onPress={() => router.push('/deliveries/new')}
             activeOpacity={0.8}
           >
             <View style={[styles.quickIconCircle, { backgroundColor: 'rgba(239, 68, 68, 0.2)' }]}>

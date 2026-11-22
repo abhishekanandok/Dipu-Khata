@@ -9,6 +9,7 @@ import { inventoryRouter } from '../modules/inventory/inventory.routes.js';
 import { salesRouter, estimateRouter } from '../modules/sales/sale.routes.js';
 import { paymentRouter, accountingRouter } from '../modules/payments/payment.routes.js';
 import { documentRouter } from '../modules/documents/document.routes.js';
+import { deliveryRouter, driverRouter, vehicleRouter } from '../modules/deliveries/delivery.routes.js';
 
 export const apiRouter = Router();
 
@@ -26,3 +27,6 @@ apiRouter.use('/estimates', estimateRouter);
 apiRouter.use('/payments', paymentRouter);
 apiRouter.use('/accounting', accountingRouter);
 apiRouter.use('/documents', documentRouter);
+apiRouter.use('/deliveries', deliveryRouter);
+apiRouter.use('/drivers', driverRouter);
+apiRouter.use('/vehicles', vehicleRouter);

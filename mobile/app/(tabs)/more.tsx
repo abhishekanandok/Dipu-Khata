@@ -22,8 +22,8 @@ export default function MoreTab() {
       items: [
         { icon: 'wallet-outline', label: 'Receive Payment', hindi: 'भुगतान / जमा', route: '/payments/receive' },
         { icon: 'document-text-outline', label: 'Estimates & Quotations', hindi: 'एस्टीमेट', route: '/estimates' },
-        { icon: 'newspaper-outline', label: 'Delivery Challans', hindi: 'डिलीवरी चालान', route: '/(tabs)/more' },
-        { icon: 'car-outline', label: 'Drivers & Vehicles', hindi: 'गाड़ी एवं चालक', route: '/(tabs)/more' },
+        { icon: 'newspaper-outline', label: 'Delivery Challans', hindi: 'डिलीवरी चालान', route: '/deliveries' },
+        { icon: 'car-outline', label: 'Drivers & Vehicles', hindi: 'गाड़ी एवं चालक', route: '/drivers' },
         { icon: 'trending-down-outline', label: 'Daily Expenses', hindi: 'दैनिक खर्च', route: '/(tabs)/more' },
       ],
     },

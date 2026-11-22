@@ -117,4 +117,21 @@ export class PrintService {
       Alert.alert('Error', 'Failed to retrieve payment receipt document.');
     }
   }
+
+  /**
+   * Fetches delivery challan and opens print/share.
+   */
+  static async printChallan(deliveryId: string, action: 'print' | 'share' = 'share'): Promise<void> {
+    try {
+      const res = await apiClient.get(`/documents/challans/${deliveryId}/html`);
+      const html = res.data;
+      if (action === 'print') {
+        await this.printHtml(html);
+      } else {
+        await this.sharePdf(html, 'Share Delivery Challan PDF');
+      }
+    } catch (err: any) {
+      Alert.alert('Error', 'Failed to retrieve delivery challan document.');
+    }
+  }
 }

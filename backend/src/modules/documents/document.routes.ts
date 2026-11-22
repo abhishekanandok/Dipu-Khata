@@ -9,3 +9,4 @@ documentRouter.get('/invoices/:id/html', DocumentController.getInvoiceHtml);
 documentRouter.get('/estimates/:id/html', DocumentController.getEstimateHtml);
 documentRouter.get('/statements/:id/html', DocumentController.getCustomerStatementHtml);
 documentRouter.get('/receipts/:id/html', DocumentController.getPaymentReceiptHtml);
+documentRouter.get('/challans/:id/html', DocumentController.getChallanHtml);

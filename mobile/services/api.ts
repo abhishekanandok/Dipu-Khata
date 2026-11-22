@@ -292,6 +292,36 @@ export const api = {
     const response = await apiClient.get('/accounting/outstanding');
     return response.data.data;
   },
+  // Drivers & Vehicles APIs
+  getDrivers: async () => {
+    const response = await apiClient.get('/drivers');
+    return response.data.data;
+  },
+  createDriver: async (data: { name: string; mobile: string; licenseNumber?: string; address?: string }) => {
+    const response = await apiClient.post('/drivers', data);
+    return response.data.data;
+  },
+  getVehicles: async () => {
+    const response = await apiClient.get('/vehicles');
+    return response.data.data;
+  },
+  createVehicle: async (data: { vehicleNumber: string; vehicleType: string; capacity?: string; notes?: string }) => {
+    const response = await apiClient.post('/vehicles', data);
+    return response.data.data;
+  },
+  // Deliveries & Challans APIs
+  getDeliveries: async (params?: { saleId?: string; customerId?: string; status?: string; search?: string; page?: number; limit?: number }) => {
+    const response = await apiClient.get('/deliveries', { params });
+    return response.data;
+  },
+  getDeliveryById: async (id: string) => {
+    const response = await apiClient.get(`/deliveries/${id}`);
+    return response.data.data;
+  },
+  createDelivery: async (data: any) => {
+    const response = await apiClient.post('/deliveries', data);
+    return response.data.data;
+  },
   // Inventory APIs
   getStockOverview: async () => {
     const response = await apiClient.get('/inventory');
