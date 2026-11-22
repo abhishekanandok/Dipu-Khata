@@ -124,6 +124,13 @@ export const api = {
     const response = await apiClient.get('/health');
     return response.data.data;
   },
+  getDashboardSummary: async (filter = 'today', startDate?: string, endDate?: string) => {
+    const params: Record<string, string> = { filter };
+    if (startDate) params.startDate = startDate;
+    if (endDate) params.endDate = endDate;
+    const response = await apiClient.get('/dashboard/summary', { params });
+    return response.data.data;
+  },
   forgotPassword: async (email: string) => {
     const response = await apiClient.post('/auth/forgot-password', { email });
     return response.data;

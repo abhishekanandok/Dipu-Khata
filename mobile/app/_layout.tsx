@@ -31,11 +31,11 @@ function RootNavigation() {
     const inAuthGroup = segments[0] === '(auth)';
 
     if (!isAuthenticated && !inAuthGroup) {
-      // Redirect to login if user is not authenticated
+      // Redirect to login if unauthenticated
       router.replace('/(auth)/login');
     } else if (isAuthenticated && inAuthGroup) {
-      // Redirect to main home dashboard if user is already authenticated
-      router.replace('/');
+      // Redirect to main tabs if already authenticated
+      router.replace('/(tabs)');
     }
   }, [isAuthenticated, isLoading, segments]);
 
@@ -73,9 +73,14 @@ function RootNavigation() {
         }}
       />
       <Stack.Screen
+        name="(tabs)"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="index"
         options={{
-          title: 'Dipu Khata & Trade',
           headerShown: false,
         }}
       />
