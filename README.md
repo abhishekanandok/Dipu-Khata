@@ -20,19 +20,26 @@ Dipu Khata/
 │   ├── src/
 │   │   ├── config/            # Env validation, MongoDB Atlas connection & retry
 │   │   ├── middleware/        # Error handler, request logger, Zod validator
+│   │   ├── modules/
+│   │   │   └── auth/          # User model, JWT rotation, bcrypt, auth routes
 │   │   ├── routes/            # API routes (Health check, Auth, Customers, Sales...)
 │   │   ├── utils/             # Standardized API response format, logger
 │   │   ├── app.ts             # Express app setup
 │   │   └── server.ts          # Server entry point
+│   ├── tests/                 # Integration test suites (auth.test.ts...)
 │   ├── .env                   # Environment secrets (MongoDB URI, JWT keys)
 │   └── tsconfig.json
 ├── mobile/                    # React Native + Expo Application
-│   ├── app/                   # Expo Router screens (_layout.tsx, index.tsx, tabs...)
+│   ├── app/                   # Expo Router screens
+│   │   ├── (auth)/            # Login, Register, Forgot Password, Reset Password, Change Password
+│   │   ├── _layout.tsx        # Auth bootstrapper & session router
+│   │   └── index.tsx          # Main dashboard & user profile preview
 │   ├── components/            # Liquid Glass Design System
 │   │   ├── glass/             # GlassCard, GlassButton, GlassInput, GlassHeader
 │   │   └── common/            # AmountDisplay, StatusBadge
 │   ├── constants/             # Theme tokens, Glassmorphism styles, Colors
-│   ├── services/              # API client (Axios + auto host IP detection)
+│   ├── services/              # API client (Axios + auto JWT refresh interceptor)
+│   ├── store/                 # Zustand stores (authStore.ts with SecureStore persistence)
 │   ├── types/                 # Shared TypeScript models
 │   └── app.json
 ├── package.json               # Root monorepo scripts
@@ -53,6 +60,7 @@ npm run dev
 
 - API Base URL: `http://localhost:5000/api`
 - Health check: `http://localhost:5000/api/health`
+- Auth tests: `npx tsx tests/auth.test.ts`
 
 ### 2. Mobile Setup
 
@@ -69,7 +77,7 @@ Press `a` for Android Emulator, `w` for Web preview, or scan the QR code with th
 ## 📋 Development Roadmap
 
 - [x] **Phase 0:** Project architecture, monorepo foundation, MongoDB Atlas connection, health check, Liquid Glass tokens.
-- [ ] **Phase 1:** Authentication, session persistence, role guards, user management.
+- [x] **Phase 1:** Authentication, session persistence, role guards, user management.
 - [ ] **Phase 2:** Main dashboard, glass navigation, real-time KPI metrics.
 - [ ] **Phase 3:** Customer management & digital Khata (opening balances, immutable ledger).
 - [ ] **Phase 4:** Material catalog, multi-units (CFT, Ton, Bag, KG), price history.

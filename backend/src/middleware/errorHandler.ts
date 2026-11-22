@@ -3,8 +3,14 @@ import { ZodError } from 'zod';
 import { ApiRes } from '../utils/apiResponse.js';
 import { logger } from '../utils/logger.js';
 
+interface CustomError extends Error {
+  statusCode?: number;
+  code?: string;
+  details?: unknown;
+}
+
 export const errorHandler = (
-  err: Error,
+  err: CustomError,
   _req: Request,
   res: Response,
   _next: NextFunction
@@ -23,11 +29,22 @@ export const errorHandler = (
     return ApiRes.badRequest(res, 'Invalid ID format provided');
   }
 
-  const message = process.env.NODE_ENV === 'production' 
-    ? 'Internal Server Error' 
+  // Handle custom application errors with statusCode
+  if (err.statusCode && err.statusCode < 500) {
+    return ApiRes.error(
+      res,
+      err.message,
+      err.statusCode,
+      err.code || 'CLIENT_ERROR',
+      err.details
+    );
+  }
+
+  const message = process.env.NODE_ENV === 'production'
+    ? 'Internal Server Error'
     : err.message || 'Internal Server Error';
 
-  return ApiRes.error(res, message, 500, 'INTERNAL_SERVER_ERROR');
+  return ApiRes.error(res, message, 500, err.code || 'INTERNAL_SERVER_ERROR');
 };
 
 export const notFoundHandler = (req: Request, res: Response) => {

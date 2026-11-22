@@ -6,28 +6,49 @@ import {
   ScrollView,
   SafeAreaView,
   RefreshControl,
+  TouchableOpacity,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
-import { Colors, Spacing } from '../constants/theme';
+import { Ionicons } from '@expo/vector-icons';
+import { Colors, Spacing, BorderRadius } from '../constants/theme';
 import { GlassCard } from '../components/glass/GlassCard';
 import { GlassButton } from '../components/glass/GlassButton';
 import { GlassHeader } from '../components/glass/GlassHeader';
 import { AmountDisplay } from '../components/common/AmountDisplay';
 import { StatusBadge } from '../components/common/StatusBadge';
 import { api, API_BASE_URL } from '../services/api';
+import { useAuthStore } from '../store/authStore';
 
 export default function HomeScreen() {
+  const router = useRouter();
+  const { user, logout } = useAuthStore();
+
   const { data: health, isLoading, refetch, isRefetching } = useQuery({
     queryKey: ['apiHealth'],
     queryFn: api.getHealth,
     retry: 1,
   });
 
+  const handleLogout = async () => {
+    await logout();
+    router.replace('/(auth)/login');
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <GlassHeader
         title="Dipu Khata & Trade"
         subtitle="दीपु खाता एवं व्यापार • Retail Management"
+        rightAction={
+          <TouchableOpacity
+            onPress={handleLogout}
+            style={styles.logoutBtn}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Ionicons name="log-out-outline" size={20} color={Colors.textSecondary} />
+          </TouchableOpacity>
+        }
       />
 
       <ScrollView
@@ -40,18 +61,55 @@ export default function HomeScreen() {
           />
         }
       >
-        {/* Phase 0 System Verification Banner */}
+        {/* User Session Banner (Phase 1) */}
         <GlassCard variant="highlight" style={styles.card}>
-          <View style={styles.headerRow}>
-            <Text style={styles.sectionTitle}>Phase 0: Foundation Status</Text>
+          <View style={styles.userRow}>
+            <View style={styles.userAvatar}>
+              <Text style={styles.avatarText}>
+                {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
+              </Text>
+            </View>
+            <View style={styles.userInfo}>
+              <Text style={styles.userName}>{user?.name || 'Authorized Operator'}</Text>
+              <Text style={styles.userEmail}>{user?.email || 'Logged in'}</Text>
+            </View>
             <StatusBadge
-              label={health?.status === 'healthy' ? 'ACTIVE' : 'INITIALIZING'}
+              label={user?.role?.toUpperCase() || 'ADMIN'}
+              variant="info"
+            />
+          </View>
+
+          <View style={styles.userActionsRow}>
+            <TouchableOpacity
+              style={styles.actionPill}
+              onPress={() => router.push('/(auth)/change-password')}
+            >
+              <Ionicons name="key-outline" size={14} color={Colors.textSecondary} />
+              <Text style={styles.actionPillText}>Change Password</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.actionPill, styles.logoutPill]}
+              onPress={handleLogout}
+            >
+              <Ionicons name="exit-outline" size={14} color={Colors.danger} />
+              <Text style={[styles.actionPillText, { color: Colors.danger }]}>Sign Out</Text>
+            </TouchableOpacity>
+          </View>
+        </GlassCard>
+
+        {/* Phase Verification Status */}
+        <GlassCard style={styles.card}>
+          <View style={styles.headerRow}>
+            <Text style={styles.sectionTitle}>Backend & Database Status</Text>
+            <StatusBadge
+              label={health?.status === 'healthy' ? 'CONNECTED' : 'CONNECTING'}
               variant={health?.status === 'healthy' ? 'success' : 'warning'}
             />
           </View>
 
           <Text style={styles.textSecondary}>
-            Backend Endpoint: <Text style={styles.codeText}>{API_BASE_URL}</Text>
+            API Endpoint: <Text style={styles.codeText}>{API_BASE_URL}</Text>
           </Text>
 
           <View style={styles.statsRow}>
@@ -62,14 +120,14 @@ export default function HomeScreen() {
               </Text>
             </View>
             <View style={styles.statCol}>
-              <Text style={styles.statLabel}>Uptime</Text>
-              <Text style={styles.statValue}>{health?.uptime ?? '—'}</Text>
+              <Text style={styles.statLabel}>Session State</Text>
+              <Text style={styles.statValue}>Active (JWT Bearer)</Text>
             </View>
           </View>
         </GlassCard>
 
-        {/* Liquid Glass UI Component Showcase */}
-        <Text style={styles.groupHeading}>Liquid Glass Design Preview</Text>
+        {/* Business Metrics Preview */}
+        <Text style={styles.groupHeading}>Store Ledger Preview</Text>
 
         <View style={styles.gridRow}>
           <GlassCard style={styles.metricCard}>
@@ -85,39 +143,10 @@ export default function HomeScreen() {
           </GlassCard>
         </View>
 
-        {/* Material Unit Sample */}
-        <GlassCard style={styles.card}>
-          <Text style={styles.sectionTitle}>Material Catalog Preview</Text>
-          
-          <View style={styles.itemRow}>
-            <View>
-              <Text style={styles.itemName}>Balu / बालू (Local Sand)</Text>
-              <Text style={styles.itemMeta}>Rate: ₹45 / CFT</Text>
-            </View>
-            <StatusBadge label="In Stock" hindiLabel="उपलब्ध" variant="success" />
-          </View>
-
-          <View style={[styles.itemRow, styles.itemDivider]}>
-            <View>
-              <Text style={styles.itemName}>Cement ACC Gold (F2R)</Text>
-              <Text style={styles.itemMeta}>Rate: ₹380 / Bag</Text>
-            </View>
-            <StatusBadge label="Low Stock" hindiLabel="कम स्टॉक" variant="warning" />
-          </View>
-
-          <View style={[styles.itemRow, styles.itemDivider]}>
-            <View>
-              <Text style={styles.itemName}>Steel Rods 12mm TMT</Text>
-              <Text style={styles.itemMeta}>Rate: ₹6,200 / Quintal</Text>
-            </View>
-            <StatusBadge label="In Stock" hindiLabel="उपलब्ध" variant="success" />
-          </View>
-        </GlassCard>
-
         {/* Action Controls */}
         <View style={styles.actionContainer}>
           <GlassButton
-            title={isLoading ? 'Verifying Backend...' : 'Verify Backend Connectivity'}
+            title={isLoading ? 'Verifying Services...' : 'Refresh Health Status'}
             onPress={() => refetch()}
             loading={isLoading}
             variant="primary"
@@ -136,8 +165,69 @@ const styles = StyleSheet.create({
   container: {
     padding: Spacing.lg,
   },
+  logoutBtn: {
+    padding: 6,
+    borderRadius: BorderRadius.md,
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+  },
   card: {
     marginBottom: Spacing.lg,
+  },
+  userRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: Spacing.md,
+  },
+  userAvatar: {
+    width: 44,
+    height: 44,
+    borderRadius: BorderRadius.full,
+    backgroundColor: Colors.primaryLight,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: Spacing.md,
+  },
+  avatarText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: '700',
+  },
+  userInfo: {
+    flex: 1,
+  },
+  userName: {
+    color: Colors.textPrimary,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  userEmail: {
+    color: Colors.textSecondary,
+    fontSize: 12,
+    marginTop: 2,
+  },
+  userActionsRow: {
+    flexDirection: 'row',
+    gap: Spacing.sm,
+    paddingTop: Spacing.md,
+    borderTopWidth: 1,
+    borderTopColor: Colors.surfaceBorder,
+  },
+  actionPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.07)',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: BorderRadius.full,
+    gap: 6,
+  },
+  logoutPill: {
+    backgroundColor: Colors.dangerGlass,
+  },
+  actionPillText: {
+    color: Colors.textSecondary,
+    fontSize: 12,
+    fontWeight: '500',
   },
   headerRow: {
     flexDirection: 'row',
@@ -205,26 +295,6 @@ const styles = StyleSheet.create({
     color: Colors.textMuted,
     fontSize: 11,
     marginTop: 4,
-  },
-  itemRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 10,
-  },
-  itemDivider: {
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(255, 255, 255, 0.06)',
-  },
-  itemName: {
-    color: Colors.textPrimary,
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  itemMeta: {
-    color: Colors.textSecondary,
-    fontSize: 12,
-    marginTop: 2,
   },
   actionContainer: {
     marginTop: Spacing.md,
