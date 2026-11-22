@@ -10,7 +10,8 @@ export interface ICustomer extends Document {
   notes?: string;
   openingBalance: number; // In paise
   openingBalanceType: BalanceType;
-  currentBalance: number; // In paise (Positive = Customer owes business, Negative = Business owes customer)
+  currentBalance: number; // In paise (Positive = Receivable / Customer owes, Negative = Advance / Payable)
+  lastTransactionDate: Date;
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -57,6 +58,11 @@ const CustomerSchema = new Schema<ICustomer>(
       default: 0,
       index: true,
     },
+    lastTransactionDate: {
+      type: Date,
+      default: Date.now,
+      index: true,
+    },
     isActive: {
       type: Boolean,
       default: true,
@@ -67,5 +73,9 @@ const CustomerSchema = new Schema<ICustomer>(
     timestamps: true,
   }
 );
+
+// Compound indexes for searching and filtering customers
+CustomerSchema.index({ name: 'text', village: 'text', mobile: 'text' });
+CustomerSchema.index({ isActive: 1, currentBalance: 1 });
 
 export const Customer = mongoose.model<ICustomer>('Customer', CustomerSchema);

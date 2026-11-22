@@ -23,22 +23,24 @@ Dipu Khata/
 │   │   ├── modules/
 │   │   │   ├── auth/          # User model, JWT rotation, bcrypt, auth routes
 │   │   │   ├── dashboard/     # Real-time metrics aggregation & date filters
-│   │   │   ├── customers/     # Customer model & ledger foundations
+│   │   │   ├── customers/     # Customer profiles, opening balance migration, search
+│   │   │   ├── ledger/        # Immutable double-entry ledger & running balance engine
 │   │   │   ├── materials/     # Material catalog & stock models
 │   │   │   ├── sales/         # Sales & line items model
 │   │   │   ├── payments/      # Payments & cash book model
 │   │   │   └── deliveries/    # Deliveries & challans model
-│   │   ├── routes/            # API routes (Health, Auth, Dashboard...)
+│   │   ├── routes/            # API routes (Health, Auth, Dashboard, Customers...)
 │   │   ├── utils/             # Standardized API response format, logger
 │   │   ├── app.ts             # Express app setup
 │   │   └── server.ts          # Server entry point
-│   ├── tests/                 # Integration test suites (auth.test.ts, dashboard.test.ts)
+│   ├── tests/                 # Integration test suites (auth, dashboard, customer-ledger)
 │   ├── .env                   # Environment secrets (MongoDB URI, JWT keys)
 │   └── tsconfig.json
 ├── mobile/                    # React Native + Expo Application
 │   ├── app/                   # Expo Router screens
 │   │   ├── (auth)/            # Login, Register, Forgot Password, Reset Password, Change Password
 │   │   ├── (tabs)/            # Bottom Tabs: Home, Sales, Khata, Stock, More
+│   │   ├── customers/         # Add Customer, Digital Khata Screen ([id]), Adjustment Entry
 │   │   ├── _layout.tsx        # Auth bootstrapper & session router
 │   │   └── index.tsx          # Initial entry router
 │   ├── components/            # Liquid Glass Design System
@@ -69,6 +71,7 @@ npm run dev
 - Health check: `http://localhost:5000/api/health`
 - Auth tests: `npx tsx tests/auth.test.ts`
 - Dashboard tests: `npx tsx tests/dashboard.test.ts`
+- Customer & Khata tests: `npx tsx tests/customer-ledger.test.ts`
 
 ### 2. Mobile Setup
 
@@ -87,7 +90,7 @@ Press `a` for Android Emulator, `w` for Web preview, or scan the QR code with th
 - [x] **Phase 0:** Project architecture, monorepo foundation, MongoDB Atlas connection, health check, Liquid Glass tokens.
 - [x] **Phase 1:** Authentication, session persistence, role guards, user management.
 - [x] **Phase 2:** Main dashboard, glass navigation, real-time KPI metrics.
-- [ ] **Phase 3:** Customer management & digital Khata (opening balances, immutable ledger).
+- [x] **Phase 3:** Customer management & digital Khata (opening balances, immutable ledger).
 - [ ] **Phase 4:** Material catalog, multi-units (CFT, Ton, Bag, KG), price history.
 - [ ] **Phase 5:** Supplier purchases & append-only stock movement ledger.
 - [ ] **Phase 6:** Estimates & sales billing (cash, UPI, Khata credit split).

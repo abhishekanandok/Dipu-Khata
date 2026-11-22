@@ -3,7 +3,6 @@ import Constants from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
 import { ApiHealthStatus } from '../types';
 
-// Dynamically determine host IP for Expo on physical device vs simulator vs web
 const getBaseUrl = (): string => {
   const hostUri = Constants.expoConfig?.hostUri;
   if (hostUri) {
@@ -23,20 +22,16 @@ export const apiClient = axios.create({
   },
 });
 
-// Interceptor 1: Attach Bearer JWT token if available
 apiClient.interceptors.request.use(async (config) => {
   try {
     const token = await SecureStore.getItemAsync('auth_token');
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-  } catch {
-    // Ignore storage errors in test or web environments
-  }
+  } catch {}
   return config;
 });
 
-// Interceptor 2: Automatic Token Refresh on 401
 let isRefreshing = false;
 let failedQueue: Array<{
   resolve: (value?: unknown) => void;
@@ -45,11 +40,8 @@ let failedQueue: Array<{
 
 const processQueue = (error: unknown, token: string | null = null) => {
   failedQueue.forEach((prom) => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      prom.resolve(token);
-    }
+    if (error) prom.reject(error);
+    else prom.resolve(token);
   });
   failedQueue = [];
 };
@@ -59,7 +51,6 @@ apiClient.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // Skip retry on login or refresh endpoints
     if (
       originalRequest.url?.includes('/auth/login') ||
       originalRequest.url?.includes('/auth/refresh') ||
@@ -85,16 +76,13 @@ apiClient.interceptors.response.use(
 
       try {
         const refreshToken = await SecureStore.getItemAsync('refresh_token');
-        if (!refreshToken) {
-          throw new Error('No refresh token available');
-        }
+        if (!refreshToken) throw new Error('No refresh token available');
 
         const response = await axios.post(`${API_BASE_URL}/auth/refresh`, {
           refreshToken,
         });
 
         const { accessToken, refreshToken: newRefreshToken } = response.data.data;
-
         await SecureStore.setItemAsync('auth_token', accessToken);
         await SecureStore.setItemAsync('refresh_token', newRefreshToken);
 
@@ -118,7 +106,6 @@ apiClient.interceptors.response.use(
   }
 );
 
-// Global API service functions
 export const api = {
   getHealth: async (): Promise<ApiHealthStatus> => {
     const response = await apiClient.get('/health');
@@ -131,6 +118,52 @@ export const api = {
     const response = await apiClient.get('/dashboard/summary', { params });
     return response.data.data;
   },
+  // Customer & Khata APIs
+  getCustomers: async (search?: string, filter = 'all', page = 1, limit = 30) => {
+    const params: Record<string, any> = { filter, page, limit };
+    if (search) params.search = search;
+    const response = await apiClient.get('/customers', { params });
+    return response.data;
+  },
+  getCustomerById: async (id: string) => {
+    const response = await apiClient.get(`/customers/${id}`);
+    return response.data.data;
+  },
+  createCustomer: async (data: {
+    name: string;
+    mobile: string;
+    village?: string;
+    address?: string;
+    notes?: string;
+    openingBalance: number;
+    openingBalanceType: 'RECEIVABLE' | 'PAYABLE';
+  }) => {
+    const response = await apiClient.post('/customers', data);
+    return response.data.data;
+  },
+  updateCustomer: async (id: string, data: any) => {
+    const response = await apiClient.put(`/customers/${id}`, data);
+    return response.data.data;
+  },
+  getCustomerLedger: async (id: string, page = 1, limit = 50) => {
+    const response = await apiClient.get(`/customers/${id}/ledger`, {
+      params: { page, limit },
+    });
+    return response.data;
+  },
+  getCustomerSummary: async (id: string) => {
+    const response = await apiClient.get(`/customers/${id}/summary`);
+    return response.data.data;
+  },
+  addCustomerAdjustment: async (id: string, data: {
+    amount: number;
+    type: 'DEBIT' | 'CREDIT';
+    description: string;
+  }) => {
+    const response = await apiClient.post(`/customers/${id}/adjustment`, data);
+    return response.data.data;
+  },
+  // Auth APIs
   forgotPassword: async (email: string) => {
     const response = await apiClient.post('/auth/forgot-password', { email });
     return response.data;
