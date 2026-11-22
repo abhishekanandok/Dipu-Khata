@@ -26,22 +26,26 @@ Dipu Khata/
 │   │   │   ├── customers/     # Customer profiles, opening balance migration, search
 │   │   │   ├── ledger/        # Immutable double-entry ledger & running balance engine
 │   │   │   ├── materials/     # Material catalog, units, categories, price history
+│   │   │   ├── purchases/     # Suppliers, inward purchase bills, accounts payable
+│   │   │   ├── inventory/     # Append-only stock movement ledger & adjustments
 │   │   │   ├── sales/         # Sales & line items model
 │   │   │   ├── payments/      # Payments & cash book model
 │   │   │   └── deliveries/    # Deliveries & challans model
-│   │   ├── routes/            # API routes (Health, Auth, Dashboard, Customers, Materials, Categories...)
+│   │   ├── routes/            # API routes (Health, Auth, Dashboard, Customers, Materials, Purchases, Inventory...)
 │   │   ├── utils/             # Standardized API response format, logger
 │   │   ├── app.ts             # Express app setup
 │   │   └── server.ts          # Server entry point
-│   ├── tests/                 # Integration test suites (auth, dashboard, customer-ledger, materials)
+│   ├── tests/                 # Integration test suites (auth, dashboard, customer-ledger, materials, purchases-inventory)
 │   ├── .env                   # Environment secrets (MongoDB URI, JWT keys)
 │   └── tsconfig.json
 ├── mobile/                    # React Native + Expo Application
 │   ├── app/                   # Expo Router screens
 │   │   ├── (auth)/            # Login, Register, Forgot Password, Reset Password, Change Password
-│   │   ├── (tabs)/            # Bottom Tabs: Home, Sales, Khata, Stock (Catalog), More
+│   │   ├── (tabs)/            # Bottom Tabs: Home, Sales, Khata, Stock (Catalog & Movements), More
 │   │   ├── customers/         # Add Customer, Digital Khata Screen ([id]), Adjustment Entry
 │   │   ├── materials/         # Add Material, Material Detail & Price History ([id])
+│   │   ├── purchases/         # Inward Purchase Entry (add.tsx)
+│   │   ├── inventory/         # Stock Adjustment Modal (adjust.tsx)
 │   │   ├── _layout.tsx        # Auth bootstrapper & session router
 │   │   └── index.tsx          # Initial entry router
 │   ├── components/            # Liquid Glass Design System
@@ -74,6 +78,7 @@ npm run dev
 - Dashboard tests: `npx tsx tests/dashboard.test.ts`
 - Customer tests: `npx tsx tests/customer-ledger.test.ts`
 - Material tests: `npx tsx tests/materials.test.ts`
+- Purchase & Inventory tests: `npx tsx tests/purchases-inventory.test.ts`
 
 ### 2. Mobile Setup
 
@@ -94,7 +99,7 @@ Press `a` for Android Emulator, `w` for Web preview, or scan the QR code with th
 - [x] **Phase 2:** Main dashboard, glass navigation, real-time KPI metrics.
 - [x] **Phase 3:** Customer management & digital Khata (opening balances, immutable ledger).
 - [x] **Phase 4:** Material catalog, multi-units (CFT, Ton, Bag, KG), price history.
-- [ ] **Phase 5:** Supplier purchases & append-only stock movement ledger.
+- [x] **Phase 5:** Supplier purchases & append-only stock movement ledger.
 - [ ] **Phase 6:** Estimates & sales billing (cash, UPI, Khata credit split).
 - [ ] **Phase 7:** Payment collection & daily cash book reconciliation.
 - [ ] **Phase 8:** Document generation (Cash Memos, PDFs, WhatsApp sharing).

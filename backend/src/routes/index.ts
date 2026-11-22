@@ -4,6 +4,8 @@ import { authRouter } from '../modules/auth/auth.routes.js';
 import { dashboardRouter } from '../modules/dashboard/dashboard.routes.js';
 import { customerRouter } from '../modules/customers/customer.routes.js';
 import { materialRouter, categoryRouter } from '../modules/materials/material.routes.js';
+import { purchaseRouter, supplierRouter } from '../modules/purchases/purchase.routes.js';
+import { inventoryRouter } from '../modules/inventory/inventory.routes.js';
 
 export const apiRouter = Router();
 
@@ -13,3 +15,6 @@ apiRouter.use('/dashboard', dashboardRouter);
 apiRouter.use('/customers', customerRouter);
 apiRouter.use('/materials', materialRouter);
 apiRouter.use('/categories', categoryRouter);
+apiRouter.use('/purchases', purchaseRouter);
+apiRouter.use('/suppliers', supplierRouter);
+apiRouter.use('/inventory', inventoryRouter);

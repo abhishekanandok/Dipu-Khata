@@ -184,6 +184,57 @@ export const api = {
     const response = await apiClient.get(`/materials/${id}/price-history`);
     return response.data.data;
   },
+  // Purchase & Supplier APIs
+  getSuppliers: async () => {
+    const response = await apiClient.get('/suppliers');
+    return response.data.data;
+  },
+  createSupplier: async (data: {
+    name: string;
+    companyName?: string;
+    mobile: string;
+    address?: string;
+    notes?: string;
+  }) => {
+    const response = await apiClient.post('/suppliers', data);
+    return response.data.data;
+  },
+  getPurchases: async (search?: string, supplierId?: string) => {
+    const params: Record<string, any> = {};
+    if (search) params.search = search;
+    if (supplierId) params.supplierId = supplierId;
+    const response = await apiClient.get('/purchases', { params });
+    return response.data;
+  },
+  getPurchaseById: async (id: string) => {
+    const response = await apiClient.get(`/purchases/${id}`);
+    return response.data.data;
+  },
+  createPurchase: async (data: any) => {
+    const response = await apiClient.post('/purchases', data);
+    return response.data.data;
+  },
+  // Inventory APIs
+  getStockOverview: async () => {
+    const response = await apiClient.get('/inventory');
+    return response.data.data;
+  },
+  getStockMovements: async (materialId?: string, movementType?: string) => {
+    const params: Record<string, any> = {};
+    if (materialId) params.materialId = materialId;
+    if (movementType) params.movementType = movementType;
+    const response = await apiClient.get('/inventory/movements', { params });
+    return response.data;
+  },
+  adjustStock: async (data: {
+    materialId: string;
+    type: 'ADD' | 'SUBTRACT' | 'DAMAGE' | 'WASTAGE';
+    quantity: number;
+    reason: string;
+  }) => {
+    const response = await apiClient.post('/inventory/adjustments', data);
+    return response.data.data;
+  },
   // Auth APIs
   forgotPassword: async (email: string) => {
     const response = await apiClient.post('/auth/forgot-password', { email });
