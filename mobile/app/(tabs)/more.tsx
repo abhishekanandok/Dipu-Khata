@@ -20,8 +20,8 @@ export default function MoreTab() {
     {
       title: 'Operations (दैनिक कार्य)',
       items: [
-        { icon: 'wallet-outline', label: 'Receive Payment', hindi: 'भुगतान / जमा', route: '/(tabs)/khata' },
-        { icon: 'document-text-outline', label: 'Estimates & Quotations', hindi: 'एस्टीमेट', route: '/(tabs)/sales' },
+        { icon: 'wallet-outline', label: 'Receive Payment', hindi: 'भुगतान / जमा', route: '/payments/receive' },
+        { icon: 'document-text-outline', label: 'Estimates & Quotations', hindi: 'एस्टीमेट', route: '/estimates' },
         { icon: 'newspaper-outline', label: 'Delivery Challans', hindi: 'डिलीवरी चालान', route: '/(tabs)/more' },
         { icon: 'car-outline', label: 'Drivers & Vehicles', hindi: 'गाड़ी एवं चालक', route: '/(tabs)/more' },
         { icon: 'trending-down-outline', label: 'Daily Expenses', hindi: 'दैनिक खर्च', route: '/(tabs)/more' },
@@ -30,7 +30,8 @@ export default function MoreTab() {
     {
       title: 'Accounting & Reports (खाता एवं रिपोर्ट)',
       items: [
-        { icon: 'book-outline', label: 'Daily Cash Book', hindi: 'रोकड़ बही', route: '/(tabs)/more' },
+        { icon: 'book-outline', label: 'Daily Cash Book', hindi: 'रोकड़ बही', route: '/accounting/cash-book' },
+        { icon: 'alert-circle-outline', label: 'Outstanding Receivables', hindi: 'बाकी वसूली', route: '/accounting/outstanding' },
         { icon: 'bar-chart-outline', label: 'Financial Reports', hindi: 'व्यापार रिपोर्ट', route: '/(tabs)/more' },
         { icon: 'cloud-offline-outline', label: 'Offline Sync Status', hindi: 'ऑफ़लाइन सिंक', route: '/(tabs)/more' },
       ],

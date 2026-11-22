@@ -255,6 +255,43 @@ export const api = {
     const response = await apiClient.post(`/estimates/${id}/convert`, data);
     return response.data.data;
   },
+  // Payments & Cash Book APIs
+  createPayment: async (data: {
+    customerId: string;
+    amount: number;
+    paymentMethod: 'CASH' | 'UPI' | 'BANK' | 'CHEQUE';
+    referenceNumber?: string;
+    relatedSaleId?: string;
+    paymentDate?: string;
+    notes?: string;
+  }) => {
+    const response = await apiClient.post('/payments', data);
+    return response.data.data;
+  },
+  getPayments: async (params?: {
+    search?: string;
+    customerId?: string;
+    paymentMethod?: string;
+    startDate?: string;
+    endDate?: string;
+    page?: number;
+    limit?: number;
+  }) => {
+    const response = await apiClient.get('/payments', { params });
+    return response.data;
+  },
+  getPaymentById: async (id: string) => {
+    const response = await apiClient.get(`/payments/${id}`);
+    return response.data.data;
+  },
+  getCashBook: async (params?: { date?: string; startDate?: string; endDate?: string }) => {
+    const response = await apiClient.get('/accounting/cash-book', { params });
+    return response.data.data;
+  },
+  getOutstandingDues: async () => {
+    const response = await apiClient.get('/accounting/outstanding');
+    return response.data.data;
+  },
   // Inventory APIs
   getStockOverview: async () => {
     const response = await apiClient.get('/inventory');

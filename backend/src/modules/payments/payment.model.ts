@@ -5,6 +5,8 @@ export type PaymentMethod = 'CASH' | 'UPI' | 'BANK' | 'CHEQUE';
 export interface IPayment extends Document {
   paymentNumber: string;
   customerId: mongoose.Types.ObjectId;
+  customerName: string;
+  customerMobile: string;
   paymentDate: Date;
   amount: number; // In paise
   paymentMethod: PaymentMethod;
@@ -12,6 +14,7 @@ export interface IPayment extends Document {
   relatedSaleId?: mongoose.Types.ObjectId;
   notes?: string;
   idempotencyKey?: string;
+  createdBy?: mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -30,6 +33,18 @@ const PaymentSchema = new Schema<IPayment>(
       required: true,
       index: true,
     },
+    customerName: {
+      type: String,
+      required: true,
+      trim: true,
+      index: true,
+    },
+    customerMobile: {
+      type: String,
+      required: true,
+      trim: true,
+      index: true,
+    },
     paymentDate: {
       type: Date,
       default: Date.now,
@@ -38,6 +53,7 @@ const PaymentSchema = new Schema<IPayment>(
     amount: {
       type: Number,
       required: true,
+      min: 1, // in paise
     },
     paymentMethod: {
       type: String,
@@ -55,6 +71,7 @@ const PaymentSchema = new Schema<IPayment>(
     },
     notes: {
       type: String,
+      trim: true,
     },
     idempotencyKey: {
       type: String,
@@ -62,10 +79,16 @@ const PaymentSchema = new Schema<IPayment>(
       sparse: true,
       index: true,
     },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
   },
   {
     timestamps: true,
   }
 );
+
+PaymentSchema.index({ customerId: 1, paymentDate: -1 });
 
 export const Payment = mongoose.model<IPayment>('Payment', PaymentSchema);

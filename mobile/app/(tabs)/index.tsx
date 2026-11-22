@@ -185,7 +185,7 @@ export default function DashboardScreen() {
         <View style={styles.quickActionGrid}>
           <TouchableOpacity
             style={styles.quickActionBtn}
-            onPress={() => router.push('/(tabs)/sales')}
+            onPress={() => router.push('/sales/new')}
             activeOpacity={0.8}
           >
             <View style={[styles.quickIconCircle, { backgroundColor: 'rgba(13, 148, 136, 0.2)' }]}>
@@ -197,7 +197,7 @@ export default function DashboardScreen() {
 
           <TouchableOpacity
             style={styles.quickActionBtn}
-            onPress={() => router.push('/(tabs)/khata')}
+            onPress={() => router.push('/customers/add')}
             activeOpacity={0.8}
           >
             <View style={[styles.quickIconCircle, { backgroundColor: 'rgba(59, 130, 246, 0.2)' }]}>
@@ -209,7 +209,7 @@ export default function DashboardScreen() {
 
           <TouchableOpacity
             style={styles.quickActionBtn}
-            onPress={() => router.push('/(tabs)/khata')}
+            onPress={() => router.push('/payments/receive')}
             activeOpacity={0.8}
           >
             <View style={[styles.quickIconCircle, { backgroundColor: 'rgba(16, 185, 129, 0.2)' }]}>
@@ -221,7 +221,7 @@ export default function DashboardScreen() {
 
           <TouchableOpacity
             style={styles.quickActionBtn}
-            onPress={() => router.push('/(tabs)/sales')}
+            onPress={() => router.push('/estimates')}
             activeOpacity={0.8}
           >
             <View style={[styles.quickIconCircle, { backgroundColor: 'rgba(245, 158, 11, 0.2)' }]}>
