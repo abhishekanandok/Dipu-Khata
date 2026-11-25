@@ -322,6 +322,51 @@ export const api = {
     const response = await apiClient.post('/deliveries', data);
     return response.data.data;
   },
+  // Expenses APIs
+  getExpenses: async (params?: {
+    search?: string;
+    category?: string;
+    paymentMethod?: string;
+    startDate?: string;
+    endDate?: string;
+    page?: number;
+    limit?: number;
+  }) => {
+    const response = await apiClient.get('/expenses', { params });
+    return response.data;
+  },
+  createExpense: async (data: {
+    category: 'TRANSPORT' | 'FUEL' | 'LABOUR' | 'MAINTENANCE' | 'SHOP' | 'MISC';
+    amount: number;
+    paymentMethod: 'CASH' | 'UPI' | 'BANK';
+    paidTo?: string;
+    notes?: string;
+    date?: string;
+  }) => {
+    const response = await apiClient.post('/expenses', data);
+    return response.data.data;
+  },
+  cancelExpense: async (id: string) => {
+    const response = await apiClient.post(`/expenses/${id}/cancel`);
+    return response.data.data;
+  },
+  // Financial Reports APIs
+  getSalesSummaryReport: async (params?: { startDate?: string; endDate?: string }) => {
+    const response = await apiClient.get('/reports/sales-summary', { params });
+    return response.data.data;
+  },
+  getCashFlowReport: async (params?: { startDate?: string; endDate?: string }) => {
+    const response = await apiClient.get('/reports/cash-flow', { params });
+    return response.data.data;
+  },
+  getProfitLossReport: async (params?: { startDate?: string; endDate?: string }) => {
+    const response = await apiClient.get('/reports/profit-loss', { params });
+    return response.data.data;
+  },
+  getStockValuationReport: async () => {
+    const response = await apiClient.get('/reports/stock-valuation');
+    return response.data.data;
+  },
   // Inventory APIs
   getStockOverview: async () => {
     const response = await apiClient.get('/inventory');

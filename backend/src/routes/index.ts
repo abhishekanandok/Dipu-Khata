@@ -10,6 +10,8 @@ import { salesRouter, estimateRouter } from '../modules/sales/sale.routes.js';
 import { paymentRouter, accountingRouter } from '../modules/payments/payment.routes.js';
 import { documentRouter } from '../modules/documents/document.routes.js';
 import { deliveryRouter, driverRouter, vehicleRouter } from '../modules/deliveries/delivery.routes.js';
+import { expenseRouter } from '../modules/expenses/expense.routes.js';
+import { reportRouter } from '../modules/reports/report.routes.js';
 
 export const apiRouter = Router();
 
@@ -30,3 +32,5 @@ apiRouter.use('/documents', documentRouter);
 apiRouter.use('/deliveries', deliveryRouter);
 apiRouter.use('/drivers', driverRouter);
 apiRouter.use('/vehicles', vehicleRouter);
+apiRouter.use('/expenses', expenseRouter);
+apiRouter.use('/reports', reportRouter);

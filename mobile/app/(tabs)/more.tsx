@@ -24,7 +24,7 @@ export default function MoreTab() {
         { icon: 'document-text-outline', label: 'Estimates & Quotations', hindi: 'एस्टीमेट', route: '/estimates' },
         { icon: 'newspaper-outline', label: 'Delivery Challans', hindi: 'डिलीवरी चालान', route: '/deliveries' },
         { icon: 'car-outline', label: 'Drivers & Vehicles', hindi: 'गाड़ी एवं चालक', route: '/drivers' },
-        { icon: 'trending-down-outline', label: 'Daily Expenses', hindi: 'दैनिक खर्च', route: '/(tabs)/more' },
+        { icon: 'trending-down-outline', label: 'Daily Expenses', hindi: 'दैनिक खर्च', route: '/expenses' },
       ],
     },
     {
@@ -32,7 +32,7 @@ export default function MoreTab() {
       items: [
         { icon: 'book-outline', label: 'Daily Cash Book', hindi: 'रोकड़ बही', route: '/accounting/cash-book' },
         { icon: 'alert-circle-outline', label: 'Outstanding Receivables', hindi: 'बाकी वसूली', route: '/accounting/outstanding' },
-        { icon: 'bar-chart-outline', label: 'Financial Reports', hindi: 'व्यापार रिपोर्ट', route: '/(tabs)/more' },
+        { icon: 'bar-chart-outline', label: 'Financial Reports', hindi: 'व्यापार रिपोर्ट', route: '/reports' },
         { icon: 'cloud-offline-outline', label: 'Offline Sync Status', hindi: 'ऑफ़लाइन सिंक', route: '/(tabs)/more' },
       ],
     },
