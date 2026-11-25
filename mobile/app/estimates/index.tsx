@@ -142,7 +142,13 @@ export default function EstimatesIndexScreen() {
           renderItem={renderEstimateItem}
           contentContainerStyle={styles.listContent}
           refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} tintColor={Colors.primary} />
+            <RefreshControl
+              refreshing={isRefetching}
+              onRefresh={() => {
+                refetch();
+              }}
+              tintColor={Colors.primary}
+            />
           }
           ListEmptyComponent={
             !isLoading ? (
@@ -153,7 +159,7 @@ export default function EstimatesIndexScreen() {
                   Create quotations for prospective builders and contractors.
                 </Text>
               </View>
-            ) : null
+            ) : undefined
           }
         />
       </View>

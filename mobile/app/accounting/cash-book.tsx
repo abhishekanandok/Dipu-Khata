@@ -63,7 +63,13 @@ export default function DailyCashBookScreen() {
       <ScrollView
         contentContainerStyle={styles.container}
         refreshControl={
-          <RefreshControl refreshing={isRefetching} onRefresh={refetch} tintColor={Colors.primary} />
+          <RefreshControl
+            refreshing={isRefetching}
+            onRefresh={() => {
+              refetch();
+            }}
+            tintColor={Colors.primary}
+          />
         }
       >
         {/* Date Navigator Bar */}

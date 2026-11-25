@@ -201,7 +201,13 @@ export default function FleetIndexScreen() {
             )}
             contentContainerStyle={styles.listContent}
             refreshControl={
-              <RefreshControl refreshing={driversLoading} onRefresh={refetchDrivers} tintColor={Colors.primary} />
+              <RefreshControl
+                refreshing={driversLoading}
+                onRefresh={() => {
+                  refetchDrivers();
+                }}
+                tintColor={Colors.primary}
+              />
             }
             ListEmptyComponent={
               <View style={styles.emptyBox}>
@@ -234,7 +240,13 @@ export default function FleetIndexScreen() {
             )}
             contentContainerStyle={styles.listContent}
             refreshControl={
-              <RefreshControl refreshing={vehiclesLoading} onRefresh={refetchVehicles} tintColor={Colors.primary} />
+              <RefreshControl
+                refreshing={vehiclesLoading}
+                onRefresh={() => {
+                  refetchVehicles();
+                }}
+                tintColor={Colors.primary}
+              />
             }
             ListEmptyComponent={
               <View style={styles.emptyBox}>

@@ -20,7 +20,7 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'home' : 'home-outline'} size={22} color={color} />
+            <Ionicons name={focused ? 'home' : 'home-outline'} size={22} color={color as string} />
           ),
         }}
       />
@@ -29,7 +29,7 @@ export default function TabLayout() {
         options={{
           title: 'Sales',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'receipt' : 'receipt-outline'} size={22} color={color} />
+            <Ionicons name={focused ? 'receipt' : 'receipt-outline'} size={22} color={color as string} />
           ),
         }}
       />
@@ -38,7 +38,7 @@ export default function TabLayout() {
         options={{
           title: 'Khata',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'book' : 'book-outline'} size={22} color={color} />
+            <Ionicons name={focused ? 'book' : 'book-outline'} size={22} color={color as string} />
           ),
         }}
       />
@@ -47,7 +47,7 @@ export default function TabLayout() {
         options={{
           title: 'Stock',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'cube' : 'cube-outline'} size={22} color={color} />
+            <Ionicons name={focused ? 'cube' : 'cube-outline'} size={22} color={color as string} />
           ),
         }}
       />
@@ -56,7 +56,7 @@ export default function TabLayout() {
         options={{
           title: 'More',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'grid' : 'grid-outline'} size={22} color={color} />
+            <Ionicons name={focused ? 'grid' : 'grid-outline'} size={22} color={color as string} />
           ),
         }}
       />

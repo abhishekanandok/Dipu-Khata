@@ -217,7 +217,9 @@ export default function SalesTab() {
           refreshControl={
             <RefreshControl
               refreshing={isRefetching}
-              onRefresh={refetch}
+              onRefresh={() => {
+                refetch();
+              }}
               tintColor={Colors.primary}
             />
           }
@@ -237,7 +239,7 @@ export default function SalesTab() {
                   style={styles.emptyBtn}
                 />
               </View>
-            ) : null
+            ) : undefined
           }
         />
       </View>

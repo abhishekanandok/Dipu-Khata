@@ -213,7 +213,13 @@ export default function OutstandingDuesScreen() {
           renderItem={renderCustomerItem}
           contentContainerStyle={styles.listContent}
           refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} tintColor={Colors.primary} />
+            <RefreshControl
+              refreshing={isRefetching}
+              onRefresh={() => {
+                refetch();
+              }}
+              tintColor={Colors.primary}
+            />
           }
           ListEmptyComponent={
             !isLoading ? (

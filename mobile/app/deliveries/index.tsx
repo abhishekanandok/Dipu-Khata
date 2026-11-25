@@ -148,7 +148,13 @@ export default function DeliveriesIndexScreen() {
           renderItem={renderDeliveryItem}
           contentContainerStyle={styles.listContent}
           refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} tintColor={Colors.primary} />
+            <RefreshControl
+              refreshing={isRefetching}
+              onRefresh={() => {
+                refetch();
+              }}
+              tintColor={Colors.primary}
+            />
           }
           ListEmptyComponent={
             !isLoading ? (
@@ -159,7 +165,7 @@ export default function DeliveriesIndexScreen() {
                   Issue delivery challans when materials leave the warehouse or yard.
                 </Text>
               </View>
-            ) : null
+            ) : undefined
           }
         />
       </View>

@@ -177,7 +177,9 @@ export default function KhataTabScreen() {
           refreshControl={
             <RefreshControl
               refreshing={isRefetching}
-              onRefresh={refetch}
+              onRefresh={() => {
+                refetch();
+              }}
               tintColor={Colors.primaryLight}
             />
           }

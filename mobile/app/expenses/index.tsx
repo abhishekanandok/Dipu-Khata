@@ -196,7 +196,13 @@ export default function ExpensesScreen() {
           renderItem={renderExpenseItem}
           contentContainerStyle={styles.listContent}
           refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} tintColor={Colors.primary} />
+            <RefreshControl
+              refreshing={isRefetching}
+              onRefresh={() => {
+                refetch();
+              }}
+              tintColor={Colors.primary}
+            />
           }
           ListEmptyComponent={
             !isLoading ? (
@@ -207,7 +213,7 @@ export default function ExpensesScreen() {
                   Log diesel, labour, loading, or shop expenses to keep your Cash Book accurate.
                 </Text>
               </View>
-            ) : null
+            ) : undefined
           }
         />
       </View>
