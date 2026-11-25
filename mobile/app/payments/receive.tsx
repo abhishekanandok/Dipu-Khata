@@ -58,7 +58,7 @@ export default function ReceivePaymentScreen() {
   const handleWhatsAppReceipt = () => {
     if (!recordedPayment || !selectedCustomer) return;
 
-    const msg = `*दीपु खाता एवं व्यापार (Dipu Khata & Trade)*\n` +
+    const msg = `*गिट्टी बालू डिप्पू (GittiBalu Dippu)*\n` +
       `💳 *भुगतान रसीद (Payment Receipt)*\n` +
       `रसीद सं. (Receipt #): #${recordedPayment.paymentNumber}\n` +
       `📅 दिनांक: ${new Date(recordedPayment.paymentDate).toLocaleDateString('en-IN')}\n` +

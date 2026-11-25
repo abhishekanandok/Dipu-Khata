@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.lg,
     borderBottomWidth: 1,
     borderBottomColor: Colors.surfaceBorder,
-    backgroundColor: 'rgba(11, 15, 25, 0.85)',
+    backgroundColor: 'rgba(255, 255, 255, 0.94)',
   },
   backButton: {
     marginRight: Spacing.sm,

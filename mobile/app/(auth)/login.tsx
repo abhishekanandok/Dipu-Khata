@@ -69,8 +69,11 @@ export default function LoginScreen() {
             <View style={styles.logoBadge}>
               <Text style={styles.logoIcon}>🏗️</Text>
             </View>
-            <Text style={styles.appTitle}>Dipu Khata & Trade</Text>
-            <Text style={styles.subtitle}>दीपु खाता एवं व्यापार • Retail Business Portal</Text>
+            <Text style={styles.appTitle}>GittiBalu Dippu</Text>
+            <Text style={styles.subtitle}>गिट्टी बालू डिप्पू</Text>
+            <Text style={[styles.subtitle, { fontSize: 12, marginTop: 4 }]}>
+              Aapke Construction Business Ka Digital Khata.
+            </Text>
           </View>
 
           {/* Login Card */}

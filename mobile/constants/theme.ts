@@ -1,38 +1,38 @@
 /**
- * Liquid Glass Design System Tokens
+ * Liquid Glass Light Design System Tokens
  * Inspired by Apple Glassmorphism and Material 3
- * Tailored for high legibility in indoor/outdoor retail environments
+ * Tailored for high legibility in bright indoor/outdoor retail environments
  */
 
 export const Colors = {
-  // Surfaces & Backgrounds
-  background: '#0B0F19', // Deep dark slate canvas
-  surface: 'rgba(30, 41, 59, 0.7)', // Frosted glass dark
-  surfaceLight: 'rgba(255, 255, 255, 0.08)', // High translucent glass
-  surfaceBorder: 'rgba(255, 255, 255, 0.12)', // Subtle highlight rim
-  surfaceBorderStrong: 'rgba(255, 255, 255, 0.25)',
+  // Surfaces & Backgrounds (Light Mode)
+  background: '#F1F5F9', // Crisp light slate canvas
+  surface: 'rgba(255, 255, 255, 0.88)', // Frosted white glass
+  surfaceLight: 'rgba(255, 255, 255, 0.96)', // High opacity light surface
+  surfaceBorder: 'rgba(15, 23, 42, 0.10)', // Subtle slate rim
+  surfaceBorderStrong: 'rgba(15, 23, 42, 0.22)',
 
   // Brand Accents
   primary: '#0D9488', // Elegant Teal
-  primaryLight: '#14B8A6',
-  primaryDark: '#0F766E',
-  primaryGlass: 'rgba(13, 148, 136, 0.25)',
+  primaryLight: '#0F766E', // Deep Teal for high contrast on light surfaces
+  primaryDark: '#115E59',
+  primaryGlass: 'rgba(13, 148, 136, 0.12)',
 
   // Financial & Functional Semantic Colors
-  success: '#10B981', // Green - Received / Paid / In Stock
-  successGlass: 'rgba(16, 185, 129, 0.15)',
-  danger: '#EF4444', // Red - Balance Due / Khata Debit / Low Stock
-  dangerGlass: 'rgba(239, 68, 68, 0.15)',
-  warning: '#F59E0B', // Amber - Pending Challan / Partial Payment
-  warningGlass: 'rgba(245, 158, 11, 0.15)',
-  info: '#3B82F6', // Blue - Bank / UPI / Info
-  infoGlass: 'rgba(59, 130, 246, 0.15)',
+  success: '#059669', // Green - Received / Paid / In Stock
+  successGlass: 'rgba(5, 150, 105, 0.12)',
+  danger: '#DC2626', // Red - Balance Due / Khata Debit / Low Stock
+  dangerGlass: 'rgba(220, 38, 38, 0.10)',
+  warning: '#D97706', // Amber - Pending Challan / Partial Payment
+  warningGlass: 'rgba(217, 119, 6, 0.12)',
+  info: '#2563EB', // Blue - Bank / UPI / Info
+  infoGlass: 'rgba(37, 99, 235, 0.12)',
 
   // Typography
-  textPrimary: '#F8FAFC',
-  textSecondary: '#94A3B8',
+  textPrimary: '#0F172A',
+  textSecondary: '#475569',
   textMuted: '#64748B',
-  textInverse: '#0F172A',
+  textInverse: '#FFFFFF',
 };
 
 export const Spacing = {
@@ -60,15 +60,15 @@ export const GlassEffects = {
     borderColor: Colors.surfaceBorder,
     borderWidth: 1,
     borderRadius: BorderRadius.lg,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.35,
-    shadowRadius: 16,
-    elevation: 8,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 3,
   },
   cardHighlight: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderColor: 'rgba(255, 255, 255, 0.18)',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderColor: 'rgba(13, 148, 136, 0.25)',
     borderWidth: 1,
     borderRadius: BorderRadius.xl,
   },

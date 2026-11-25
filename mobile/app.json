@@ -1,17 +1,17 @@
 {
   "expo": {
-    "name": "Dipu Khata & Trade",
-    "slug": "dipu-khata-trade",
+    "name": "GittiBalu Dippu",
+    "slug": "gittibalu-dippu",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme": "dipukhata",
-    "userInterfaceStyle": "automatic",
+    "scheme": "gittibaludippu",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#0F172A"
+      "backgroundColor": "#F1F5F9"
     },
     "ios": {
       "supportsTablet": true
@@ -19,9 +19,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#0F172A"
+        "backgroundColor": "#F1F5F9"
       },
-      "package": "com.dipukhata.trade"
+      "package": "com.gittibalu.dippu"
     },
     "web": {
       "bundler": "metro"

@@ -47,8 +47,8 @@ export default function DashboardScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <GlassHeader
-        title="Dipu Khata & Trade"
-        subtitle={`नमस्ते, ${user?.name || 'व्यापारी'} • Live Dashboard`}
+        title="GittiBalu Dippu"
+        subtitle={`गिट्टी बालू डिप्पू • नमस्ते, ${user?.name || 'व्यापारी'}`}
         rightAction={
           <TouchableOpacity
             style={styles.headerBtn}
@@ -417,7 +417,7 @@ const styles = StyleSheet.create({
   },
   quickActionBtn: {
     width: '31%',
-    backgroundColor: 'rgba(30, 41, 59, 0.7)',
+    backgroundColor: Colors.surface,
     borderRadius: BorderRadius.lg,
     borderWidth: 1,
     borderColor: Colors.surfaceBorder,

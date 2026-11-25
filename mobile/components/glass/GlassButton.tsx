@@ -34,14 +34,18 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
       case 'primary':
         return { backgroundColor: Colors.primary };
       case 'secondary':
-        return { backgroundColor: 'rgba(255, 255, 255, 0.12)' };
+        return {
+          backgroundColor: '#E2E8F0',
+          borderWidth: 1,
+          borderColor: Colors.surfaceBorder,
+        };
       case 'danger':
         return { backgroundColor: Colors.danger };
       case 'outline':
         return {
           backgroundColor: 'transparent',
           borderWidth: 1,
-          borderColor: Colors.primaryLight,
+          borderColor: Colors.primary,
         };
       default:
         return { backgroundColor: Colors.primary };
@@ -67,11 +71,23 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
       {...props}
     >
       {loading ? (
-        <ActivityIndicator color="#FFFFFF" size="small" />
+        <ActivityIndicator
+          color={variant === 'secondary' || variant === 'outline' ? Colors.primary : '#FFFFFF'}
+          size="small"
+        />
       ) : (
         <View style={styles.contentRow}>
           {icon && <View style={styles.iconContainer}>{icon}</View>}
-          <Text style={[styles.text, disabled && styles.textDisabled]}>{title}</Text>
+          <Text
+            style={[
+              styles.text,
+              variant === 'secondary' && { color: Colors.textPrimary },
+              variant === 'outline' && { color: Colors.primary },
+              disabled && styles.textDisabled,
+            ]}
+          >
+            {title}
+          </Text>
         </View>
       )}
     </TouchableOpacity>

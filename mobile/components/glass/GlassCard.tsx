@@ -21,11 +21,11 @@ export const GlassCard: React.FC<GlassCardProps> = ({
   const getBorderColor = () => {
     switch (variant) {
       case 'highlight':
-        return 'rgba(255, 255, 255, 0.28)';
+        return 'rgba(13, 148, 136, 0.28)';
       case 'accent':
-        return Colors.primaryLight;
+        return Colors.primary;
       case 'danger':
-        return Colors.danger;
+        return 'rgba(220, 38, 38, 0.35)';
       default:
         return Colors.surfaceBorder;
     }
@@ -46,7 +46,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
   }
 
   return (
-    <BlurView intensity={intensity} tint="dark" style={styles.blurContainer}>
+    <BlurView intensity={intensity} tint="light" style={styles.blurContainer}>
       {content}
     </BlurView>
   );
@@ -56,20 +56,29 @@ const styles = StyleSheet.create({
   blurContainer: {
     borderRadius: BorderRadius.lg,
     overflow: 'hidden',
-    backgroundColor: 'rgba(15, 23, 42, 0.65)',
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
     borderWidth: 1,
     borderColor: Colors.surfaceBorder,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 2,
   },
   innerContainer: {
     padding: 16,
     borderRadius: BorderRadius.lg,
   },
   webGlass: {
-    backgroundColor: 'rgba(30, 41, 59, 0.75)',
+    backgroundColor: 'rgba(255, 255, 255, 0.90)',
     backdropFilter: 'blur(16px)',
     borderRadius: BorderRadius.lg,
     borderWidth: 1,
     borderColor: Colors.surfaceBorder,
     padding: 16,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
   } as any,
 });

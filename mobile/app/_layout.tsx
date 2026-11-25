@@ -100,7 +100,7 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        <StatusBar style="light" />
+        <StatusBar style="dark" />
         <RootNavigation />
       </QueryClientProvider>
     </SafeAreaProvider>

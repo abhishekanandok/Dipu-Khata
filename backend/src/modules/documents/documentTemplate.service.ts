@@ -153,8 +153,8 @@ export class DocumentTemplateService {
         <div class="header">
           <div class="brand-row">
             <div>
-              <h1 class="brand-title">DIPU KHATA & TRADE</h1>
-              <div class="brand-hindi">दीपु खाता एवं व्यापार • निर्माण सामग्री भंडार</div>
+              <h1 class="brand-title">GITTIBALU DIPPU</h1>
+              <div class="brand-hindi">गिट्टी बालू डिप्पू • Aapke Construction Business Ka Digital Khata.</div>
               <div class="brand-tagline">Balu, Cement, Gitti, Steel TMT, Bricks & Building Materials</div>
             </div>
             <div class="brand-contact">
@@ -244,11 +244,11 @@ export class DocumentTemplateService {
 
         <div class="signatures">
           <div class="sign-box">Customer / Receiver's Signature</div>
-          <div class="sign-box">For Dipu Khata & Trade<br>(Authorized Signatory)</div>
+          <div class="sign-box">For GittiBalu Dippu<br>(Authorized Signatory)</div>
         </div>
 
         <div class="footer-note">
-          Computer generated retail tax bill • Dipu Khata & Trade • Thank you for your business!
+          Computer generated retail tax bill • GittiBalu Dippu • Thank you for your business!
         </div>
       </body>
       </html>
@@ -292,7 +292,7 @@ export class DocumentTemplateService {
         <div class="header">
           <div class="brand-row">
             <div>
-              <h1 class="brand-title">DIPU KHATA & TRADE</h1>
+              <h1 class="brand-title">GITTIBALU DIPPU</h1>
               <div class="brand-hindi">अनुमान / कोटेशन (PRICE QUOTATION)</div>
               <div class="brand-tagline">Retail Construction Materials & Logistics</div>
             </div>
@@ -372,7 +372,7 @@ export class DocumentTemplateService {
 
         <div class="signatures">
           <div class="sign-box">Client Acceptance</div>
-          <div class="sign-box">For Dipu Khata & Trade</div>
+          <div class="sign-box">For GittiBalu Dippu</div>
         </div>
       </body>
       </html>
@@ -432,7 +432,7 @@ export class DocumentTemplateService {
         <div class="header">
           <div class="brand-row">
             <div>
-              <h1 class="brand-title">DIPU KHATA & TRADE</h1>
+              <h1 class="brand-title">GITTIBALU DIPPU</h1>
               <div class="brand-hindi">ग्राहक खाता विवरणी (CUSTOMER ACCOUNT STATEMENT)</div>
               <div class="brand-tagline">Retail Building Materials • Ledger Book</div>
             </div>
@@ -484,7 +484,7 @@ export class DocumentTemplateService {
 
         <div class="signatures" style="margin-top: 50px;">
           <div class="sign-box">Customer Signature</div>
-          <div class="sign-box">For Dipu Khata & Trade</div>
+          <div class="sign-box">For GittiBalu Dippu</div>
         </div>
       </body>
       </html>
@@ -514,7 +514,7 @@ export class DocumentTemplateService {
         <div class="header">
           <div class="brand-row">
             <div>
-              <h1 class="brand-title">DIPU KHATA & TRADE</h1>
+              <h1 class="brand-title">GITTIBALU DIPPU</h1>
               <div class="brand-hindi">भुगतान रसीद (PAYMENT RECEIPT)</div>
             </div>
             <div class="brand-contact">
@@ -551,7 +551,7 @@ export class DocumentTemplateService {
 
         <div class="signatures">
           <div class="sign-box">Payer's Signature</div>
-          <div class="sign-box">Authorized Signatory<br>Dipu Khata & Trade</div>
+          <div class="sign-box">Authorized Signatory<br>GittiBalu Dippu</div>
         </div>
       </body>
       </html>
@@ -592,7 +592,7 @@ export class DocumentTemplateService {
         <div class="header">
           <div class="brand-row">
             <div>
-              <h1 class="brand-title">DIPU KHATA & TRADE</h1>
+              <h1 class="brand-title">GITTIBALU DIPPU</h1>
               <div class="brand-hindi">सामान डिलीवरी चालान (DELIVERY CHALLAN)</div>
               <div class="brand-tagline">Building Materials Transport & Logistics</div>
             </div>
@@ -646,11 +646,11 @@ export class DocumentTemplateService {
         <div class="signatures" style="margin-top: 60px;">
           <div class="sign-box">Driver Signature (चालक हस्ताक्षर)</div>
           <div class="sign-box">Receiver Signature (प्राप्तकर्ता हस्ताक्षर)</div>
-          <div class="sign-box">Authorized Dispatcher<br>Dipu Khata & Trade</div>
+          <div class="sign-box">Authorized Dispatcher<br>GittiBalu Dippu</div>
         </div>
 
         <div class="footer-note">
-          Check goods upon delivery • Dipu Khata & Trade • Thank you!
+          Check goods upon delivery • GittiBalu Dippu • Thank you!
         </div>
       </body>
       </html>
