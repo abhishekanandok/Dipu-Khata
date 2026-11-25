@@ -33,7 +33,7 @@ export default function MoreTab() {
         { icon: 'book-outline', label: 'Daily Cash Book', hindi: 'रोकड़ बही', route: '/accounting/cash-book' },
         { icon: 'alert-circle-outline', label: 'Outstanding Receivables', hindi: 'बाकी वसूली', route: '/accounting/outstanding' },
         { icon: 'bar-chart-outline', label: 'Financial Reports', hindi: 'व्यापार रिपोर्ट', route: '/reports' },
-        { icon: 'cloud-offline-outline', label: 'Offline Sync Status', hindi: 'ऑफ़लाइन सिंक', route: '/(tabs)/more' },
+        { icon: 'cloud-offline-outline', label: 'Offline Sync Status', hindi: 'ऑफ़लाइन सिंक', route: '/sync' },
       ],
     },
     {

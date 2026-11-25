@@ -367,6 +367,17 @@ export const api = {
     const response = await apiClient.get('/reports/stock-valuation');
     return response.data.data;
   },
+  // Offline Sync APIs
+  syncBatch: async (operations: any[]) => {
+    const response = await apiClient.post('/sync/batch', { operations });
+    return response.data.data;
+  },
+  pullSyncDelta: async (since?: string) => {
+    const params: Record<string, string> = {};
+    if (since) params.since = since;
+    const response = await apiClient.get('/sync/pull', { params });
+    return response.data.data;
+  },
   // Inventory APIs
   getStockOverview: async () => {
     const response = await apiClient.get('/inventory');

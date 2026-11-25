@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { View, ActivityIndicator } from 'react-native';
 import { Colors } from '../constants/theme';
 import { useAuthStore } from '../store/authStore';
+import { SyncManager } from '../services/syncManager';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,6 +25,13 @@ function RootNavigation() {
   useEffect(() => {
     checkAuth();
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      SyncManager.startListening();
+      return () => SyncManager.stopListening();
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (isLoading) return;
