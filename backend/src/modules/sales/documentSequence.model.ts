@@ -44,7 +44,7 @@ export const DocumentSequence = mongoose.model<IDocumentSequence>(
  * PREFIX-YYMM-XXXX (e.g. DK-2611-0001, EST-2611-0001)
  */
 export async function getNextDocumentNumber(
-  type: 'SALE' | 'ESTIMATE' | 'PAYMENT' | 'CHALLAN',
+  type: 'SALE' | 'ESTIMATE' | 'PAYMENT' | 'CHALLAN' | 'EXPENSE',
   prefix: string
 ): Promise<string> {
   const now = new Date();

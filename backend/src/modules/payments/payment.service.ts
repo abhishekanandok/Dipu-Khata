@@ -3,6 +3,7 @@ import { Payment, IPayment } from './payment.model.js';
 import { Customer } from '../customers/customer.model.js';
 import { LedgerEntry } from '../ledger/ledger.model.js';
 import { Sale } from '../sales/sale.model.js';
+import { Expense } from '../expenses/expense.model.js';
 import { getNextDocumentNumber } from '../sales/documentSequence.model.js';
 import { AppError } from '../../middleware/errorHandler.js';
 import {
@@ -277,9 +278,40 @@ export class PaymentService {
       });
     }
 
+    // 3. Outflow from Business Expenses during this period
+    const expenses = await Expense.find({
+      date: { $gte: start, $lte: end },
+      isCancelled: false,
+    }).lean();
+
+    let cashExpensesTotal = 0;
+    let digitalExpensesTotal = 0;
+    const expenseTransactions: any[] = [];
+
+    for (const exp of expenses) {
+      if (exp.paymentMethod === 'CASH') {
+        cashExpensesTotal += exp.amount;
+      } else {
+        digitalExpensesTotal += exp.amount;
+      }
+
+      expenseTransactions.push({
+        type: 'EXPENSE_OUTFLOW',
+        expenseNumber: exp.expenseNumber,
+        customerName: `${exp.category}${exp.paidTo ? ` (${exp.paidTo})` : ''}`,
+        method: exp.paymentMethod,
+        amount: -exp.amount,
+        date: exp.date,
+      });
+    }
+
     const totalCashInflow = cashSalesTotal + cashCollectionsTotal;
     const totalDigitalInflow = upiSalesTotal + upiCollectionsTotal + bankSalesTotal + bankCollectionsTotal;
     const totalInflow = totalCashInflow + totalDigitalInflow;
+    const totalExpenses = cashExpensesTotal + digitalExpensesTotal;
+    const netCashInDrawer = totalCashInflow - cashExpensesTotal;
+    const netDigitalBalance = totalDigitalInflow - digitalExpensesTotal;
+    const netCashFlow = totalInflow - totalExpenses;
 
     return {
       period: {
@@ -290,6 +322,8 @@ export class PaymentService {
         cashSales: cashSalesTotal,
         cashCollections: cashCollectionsTotal,
         totalCashInflow,
+        cashExpenses: cashExpensesTotal,
+        netCashInDrawer,
       },
       digitalAccounts: {
         upiSales: upiSalesTotal,
@@ -297,14 +331,19 @@ export class PaymentService {
         bankSales: bankSalesTotal,
         bankCollections: bankCollectionsTotal,
         totalDigitalInflow,
+        digitalExpenses: digitalExpensesTotal,
+        netDigitalBalance,
       },
       summary: {
         totalCashInflow,
         totalDigitalInflow,
         totalInflow,
-        transactionsCount: saleTransactions.length + paymentTransactions.length,
+        totalExpenses,
+        netCashFlow,
+        transactionsCount:
+          saleTransactions.length + paymentTransactions.length + expenseTransactions.length,
       },
-      transactions: [...saleTransactions, ...paymentTransactions].sort(
+      transactions: [...saleTransactions, ...paymentTransactions, ...expenseTransactions].sort(
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
       ),
     };

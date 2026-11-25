@@ -30,8 +30,8 @@ export const formatCurrency = (paise: number, showDecimals = true): string => {
     integerPart = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree;
   }
 
-  const formatted = showDecimals && decimalPart !== '00' 
-    ? `${integerPart}.${decimalPart}` 
+  const formatted = showDecimals && decimalPart !== '00'
+    ? `${integerPart}.${decimalPart}`
     : integerPart;
 
   return `${isNegative ? '-' : ''}₹${formatted}`;
