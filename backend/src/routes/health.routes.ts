@@ -10,7 +10,7 @@ healthRouter.get('/', (_req: Request, res: Response) => {
   
   const healthData = {
     status: db.isConnected ? 'healthy' : 'degraded',
-    service: 'GittiBalu Dippu API',
+    service: 'GittiBalu Depo API',
     version: '1.0.0',
     uptime: `${Math.floor(uptime)}s`,
     database: {

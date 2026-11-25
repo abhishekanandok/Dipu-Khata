@@ -65,7 +65,7 @@ export default function EstimateDetailScreen() {
       )
       .join('\n');
 
-    const msg = `*गिट्टी बालू डिप्पू (GittiBalu Dippu)*\n` +
+    const msg = `*गिट्टी बालू डिपो (GittiBalu Depo)*\n` +
       `📋 *अनुमान / कोटेशन (Estimate): #${estimate.estimateNumber}*\n` +
       `📅 दिनांक: ${new Date(estimate.estimateDate).toLocaleDateString('en-IN')}\n` +
       `👤 ग्राहक: ${estimate.customerName} (${estimate.customerMobile})\n\n` +

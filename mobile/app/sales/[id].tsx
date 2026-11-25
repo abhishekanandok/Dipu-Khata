@@ -72,7 +72,7 @@ export default function SaleDetailScreen() {
       )
       .join('\n');
 
-    const msg = `*गिट्टी बालू डिप्पू (GittiBalu Dippu)*\n` +
+    const msg = `*गिट्टी बालू डिपो (GittiBalu Depo)*\n` +
       `🧾 *बिल सं. (Invoice): #${sale.invoiceNumber}*\n` +
       `📅 दिनांक: ${new Date(sale.saleDate).toLocaleDateString('en-IN')}\n` +
       `👤 ग्राहक: ${sale.customerName} (${sale.customerMobile})\n\n` +

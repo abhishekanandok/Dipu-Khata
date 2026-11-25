@@ -167,7 +167,7 @@ async function runDocumentsPdfTests() {
       throw new Error(`Invoice HTML fetch failed: status ${invRes.status}`);
     }
 
-    if (!invHtml.includes('DK-2611-9999') || (!invHtml.includes('GITTIBALU DIPPU') && !invHtml.includes('GittiBalu Dippu'))) {
+    if (!invHtml.includes('DK-2611-9999') || (!invHtml.includes('GITTIBALU DEPO') && !invHtml.includes('GittiBalu Depo'))) {
       throw new Error(`Invoice HTML content missing expected invoice or header: ${invHtml.slice(0, 300)}`);
     }
     if (!invHtml.includes('Ten Thousand Rupees Only')) {

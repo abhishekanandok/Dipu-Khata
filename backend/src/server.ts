@@ -13,7 +13,7 @@ const startServer = async () => {
 
     // 3. Start listening
     const server = app.listen(env.PORT, () => {
-      logger.info(`🚀 GittiBalu Dippu API Server running on port ${env.PORT} [${env.NODE_ENV}]`);
+      logger.info(`🚀 GittiBalu Depo API Server running on port ${env.PORT} [${env.NODE_ENV}]`);
       logger.info(`👉 Health check: http://localhost:${env.PORT}/api/health`);
     });
 

@@ -68,7 +68,7 @@ export default function CustomerKhataScreen() {
     const balanceText = formatCurrency(customer.currentBalance);
     const statusText = customer.currentBalance > 0 ? 'बाकी (Due)' : 'जमा (Advance)';
 
-    const message = `*गिट्टी बालू डिप्पू (GittiBalu Dippu)*\n\n` +
+    const message = `*गिट्टी बालू डिपो (GittiBalu Depo)*\n\n` +
       `ग्राहक: ${customer.name}\n` +
       `मोबाइल: ${customer.mobile}\n` +
       `तारीख: ${new Date().toLocaleDateString('en-IN')}\n\n` +

@@ -80,7 +80,7 @@ export default function RegisterScreen() {
 
           <View style={styles.header}>
             <Text style={styles.appTitle}>Create Account</Text>
-            <Text style={styles.subtitle}>Setup GittiBalu Dippu (गिट्टी बालू डिप्पू)</Text>
+            <Text style={styles.subtitle}>Setup GittiBalu Depo (गिट्टी बालू डिपो)</Text>
           </View>
 
           <GlassCard variant="highlight" style={styles.card}>

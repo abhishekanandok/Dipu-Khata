@@ -52,7 +52,7 @@ export default function OutstandingDuesScreen() {
   };
 
   const handleWhatsAppReminder = (customer: any) => {
-    const msg = `*गिट्टी बालू डिप्पू (GittiBalu Dippu)*\n` +
+    const msg = `*गिट्टी बालू डिपो (GittiBalu Depo)*\n` +
       `आदरणीय ${customer.name} जी,\n\n` +
       `आपके खाते का बकाया राशि: *₹${(customer.currentBalance / 100).toFixed(2)}* है।\n` +
       `कृपया इसे जल्द से जल्द चुकता करने का कष्ट करें।\n\n` +

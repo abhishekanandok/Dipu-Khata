@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "GittiBalu Dippu",
-    "slug": "gittibalu-dippu",
+    "name": "GittiBalu Depo",
+    "slug": "gittibalu-depo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme": "gittibaludippu",
+    "scheme": "gittibaludepo",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -21,7 +21,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#F1F5F9"
       },
-      "package": "com.gittibalu.dippu"
+      "package": "com.gittibalu.depo"
     },
     "web": {
       "bundler": "metro"

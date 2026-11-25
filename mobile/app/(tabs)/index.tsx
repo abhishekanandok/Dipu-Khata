@@ -47,8 +47,8 @@ export default function DashboardScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <GlassHeader
-        title="GittiBalu Dippu"
-        subtitle={`गिट्टी बालू डिप्पू • नमस्ते, ${user?.name || 'व्यापारी'}`}
+        title="GittiBalu Depo"
+        subtitle={`गिट्टी बालू डिपो • नमस्ते, ${user?.name || 'व्यापारी'}`}
         rightAction={
           <TouchableOpacity
             style={styles.headerBtn}

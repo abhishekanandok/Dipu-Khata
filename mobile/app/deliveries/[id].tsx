@@ -52,7 +52,7 @@ export default function DeliveryChallanDetailScreen() {
       .map((i: any) => `• ${i.materialName}: ${i.quantity} ${i.unit}`)
       .join('\n');
 
-    const msg = `*गिट्टी बालू डिप्पू (GittiBalu Dippu)*\n` +
+    const msg = `*गिट्टी बालू डिपो (GittiBalu Depo)*\n` +
       `🚚 *सामान डिलीवरी चालान (Delivery Dispatch)*\n` +
       `चालान सं. (Challan #): #${delivery.challanNumber}\n` +
       `बिल सं. (Invoice #): #${delivery.invoiceNumber}\n` +
